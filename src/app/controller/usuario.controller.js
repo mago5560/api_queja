@@ -21,6 +21,7 @@ exports.create=(req, res) =>{
       const _Obj = {
           nombre: req.body.nombre,
           apellido: req.body.apellido,
+          usuario: req.body.usuario,
           contraseña: req.body.contraseña,
           telefono: req.body.telefono,
           direccion: req.body.direccion,

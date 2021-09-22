@@ -18,4 +18,6 @@ require('./comercio.route')(router)
 require('./encargado.route')(router)
 require('./queja.route')(router)
 
+require('./login.route')(router)
+
 module.exports = router;

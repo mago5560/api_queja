@@ -1,18 +1,17 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = router =>{
-    const ws = require("../controller/comercio.controller.js");
+    const ws = require("../controller/sucursal.controller.js");
     var api = require("express").Router();
 
     api.post("/", ensureToken,ws.create);
     api.get("/",ws.findAll);
     api.get("/:id",ws.findOne);
-    api.get("/municipio/:id",ws.findOneMunicipio);
-    api.get("/municipio/:id",ensureToken,ws.findOneEncargado);
+    api.get("/comercio/:id",ws.findOneComercio);
     api.put("/:id",ensureToken,ws.update);
     api.delete("/:id",ensureToken,ws.delete);
 
-    router.use("/api/comercio",api);
+    router.use("/api/sucursal",api);
 }
 
 

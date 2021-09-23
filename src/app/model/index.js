@@ -25,8 +25,10 @@ db.region= require("./region.model")(sequelize,Sequelize);
 db.departamento= require("./departamento.model")(sequelize,Sequelize);
 db.municipio= require("./municipio.model")(sequelize,Sequelize);
 db.comercio= require("./comercio.model")(sequelize,Sequelize);
+db.sucursal= require("./sucursal.model")(sequelize,Sequelize);
 db.encargado= require("./encargado.model")(sequelize,Sequelize);
 db.queja= require("./queja.model")(sequelize,Sequelize);
+db.sucursal= require("./sucursal.model")(sequelize,Sequelize);
 
 
 //Relaciones
@@ -45,8 +47,11 @@ db.comercio.belongsTo(db.municipio);
 db.encargado.hasMany(db.comercio);
 db.comercio.belongsTo(db.encargado);
 
-db.comercio.hasMany(db.queja);
-db.queja.belongsTo(db.comercio);
+db.comercio.hasMany(db.sucursal);
+db.sucursal.belongsTo(db.comercio);
+
+db.sucursal.hasMany(db.queja);
+db.queja.belongsTo(db.sucursal);
 
 
 module.exports = db;

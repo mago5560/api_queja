@@ -1,6 +1,5 @@
 const express = require('express');
 const morgan = require('morgan');
-//const bodyParser = require('body-parser');
 const cors= require("cors");
 const app = express();
 
@@ -23,9 +22,9 @@ app.use(express.json());
 
 //int DB
 const db= require('./app/model');
-db.sequelize.sync();
+//db.sequelize.sync();
 //recronstruir los Objetos
-//db.sequelize.sync({force:true});
+db.sequelize.sync({force:true});
 
 // routes
 app.use(require('./app/routes'));

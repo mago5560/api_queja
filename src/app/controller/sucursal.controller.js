@@ -1,8 +1,10 @@
 const db = require("../model");
-const Obj = db.comercio;
+const Obj = db.sucursal;
 const Departamento = db.departamento;
 const Municipio = db.municipio;
+const Comercio = db.comercio;
 const Encargado = db.encargado;
+const Queja = db.queja;
 const Op = db.Sequelize.Op;
 
 exports.create=(req, res) =>{
@@ -16,9 +18,9 @@ exports.create=(req, res) =>{
 
       const _Obj = {
           nombre: req.body.nombre,
-          municipioId: req.body.municipioId,
-          encargadoId: req.body.encargadoId
-
+          telefono: req.body.telefono,
+          direccion: req.body.direccion,
+          comercioId: req.body.comercioId
       }
 
       Obj.create(_Obj)
@@ -35,9 +37,11 @@ exports.create=(req, res) =>{
 
 exports.findAll = (req, res) => {
 
-    Obj.findAll({ include:[
-                           {model:Municipio,include:[{model:Departamento ,include:'region' }]
-                          },{model:Encargado}]      
+    Obj.findAll({ include:[{model:Comercio
+                            , include:[{model:Municipio,include:[{model:Departamento ,include:'region' }]
+                        },{model:Encargado}]
+                          },{model:Queja}
+                           ]      
     })
       .then(data => {
         res.json(data);
@@ -53,11 +57,12 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Obj.findByPk(id,{ include:[
-                            { model: Municipio,include:[{model: Departamento, include:'region'}
-                            ,{model:Encargado}
-                          ]
-    }]})
+    Obj.findByPk(id,{ include:[{model:Comercio
+                                , include:[{model:Municipio,include:[{model:Departamento ,include:'region' }]
+                            },{model:Encargado}]
+                            },{model:Queja}
+                            ] 
+    })
       .then(data => {
         res.json(data);
       })
@@ -69,34 +74,15 @@ exports.findOne = (req, res) => {
   };
 
 
-exports.findOneMunicipio = (req, res) => {
+exports.findOneComercio = (req, res) => {
   const id = req.params.id;
 
-  Obj.findAll({where:{municipioId:id}, 
-                include:[
-                  {model: Municipio,include:[{model: Departamento, include:'region'}]}
-                  ,{model:Encargado}
-              ]
-              })
-    .then(data => {
-      res.json(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Error retrieving find one object with id=" + id
-      });
-    });
-};
-
-
-exports.findOneEncargado = (req, res) => {
-  const id = req.params.id;
-
-  Obj.findAll({where:{encargadoId:id}, 
-                include:[
-                  {model: Municipio,include:[{model: Departamento, include:'region'}]}
-                  ,{model:Encargado}
-              ]
+  Obj.findAll({where:{comercioId:id}, 
+                include:[{model:Comercio
+                            , include:[{model:Municipio,include:[{model:Departamento ,include:'region' }]
+                        },{model:Encargado}]
+                        },{model:Queja}
+                   ] 
               })
     .then(data => {
       res.json(data);

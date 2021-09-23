@@ -21,13 +21,13 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 
 //int DB
-const db= require('./app/model');
+const db= require('./app/model/index');
 //db.sequelize.sync();
 //recronstruir los Objetos
 db.sequelize.sync({force:true});
 
 // routes
-app.use(require('./app/routes'));
+app.use(require('./app/routes/index'));
 
 // starting the server
 app.listen(app.get('port'), () => {

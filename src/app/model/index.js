@@ -49,6 +49,4 @@ db.comercio.hasMany(db.queja);
 db.queja.belongsTo(db.comercio);
 
 
-
-
 module.exports = db;

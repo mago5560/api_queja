@@ -1,4 +1,6 @@
 module.exports={
+      /*
+      //Internet
     HOST:"ec2-18-209-143-227.compute-1.amazonaws.com",
     PORT:5432,
     USER:"yrkwibqpwqdmny",    
@@ -11,7 +13,7 @@ module.exports={
         acquire:30000,
         idle:10000
     }
-    /*
+  */
     //Local
     HOST:"localhost",
     PORT:5432,
@@ -24,5 +26,5 @@ module.exports={
         min:0,
         acquire:30000,
         idle:10000
-    }*/
+    }
 };

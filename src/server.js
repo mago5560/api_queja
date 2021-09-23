@@ -22,9 +22,9 @@ app.use(express.json());
 
 //int DB
 const db= require('./app/model/index');
-//db.sequelize.sync();
+db.sequelize.sync();
 //recronstruir los Objetos
-db.sequelize.sync({force:true});
+//db.sequelize.sync({force:true});
 
 // routes
 app.use(require('./app/routes/index'));

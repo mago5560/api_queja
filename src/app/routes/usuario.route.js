@@ -1,14 +1,35 @@
+const jwt = require("jsonwebtoken");
+
 module.exports = router =>{
     const usuario = require("../controller/usuario.controller.js");
     var api = require("express").Router();
 
-    api.post("/", usuario.create);
-    api.get("/",usuario.findAll);
-    api.get("/:id",usuario.findOne);
-    api.get("/activos",usuario.findAllActivo);
-    api.put("/:id",usuario.update);
-    api.delete("/:id",usuario.delete);
+    api.post("/",ensureToken, usuario.create);
+    api.get("/",ensureToken,usuario.findAll);
+    api.get("/:id",ensureToken,usuario.findOne);
+    api.get("/activos",ensureToken,usuario.findAllActivo);
+    api.put("/:id",ensureToken,usuario.update);
+    api.delete("/:id",ensureToken,usuario.delete);
 
 
     router.use("/api/usuario",api);
 }
+
+function ensureToken(req, res, next) {
+    const bearerHeader = req.headers["authorization"];
+    console.log(bearerHeader)
+    if(typeof bearerHeader !== 'undefined') {
+      const bearer = bearerHeader.split(" ");
+      const bearerToken = bearer[1];
+      req.token = bearerToken;
+      jwt.verify(bearerToken,'LAMG',(err)=>{
+          if(err){
+              res.status(403).json({"mensaje":"Token incorrecto"});
+          }else{
+              next();
+          }
+      });
+    } else {
+      res.status(403).json({"mensaje":"Token requerido"});
+    }
+  }

@@ -1,7 +1,7 @@
 const db = require("../model");
 const Obj = db.usuario;
 const Op = db.Sequelize.Op;
-
+ 
 exports.create=(req, res) =>{
 
     if (!req.body.nombre) {
@@ -40,18 +40,18 @@ exports.create=(req, res) =>{
 
 };
 
-exports.findAll = (req, res) => {
-
+exports.findAll =  (req, res) => {
     Obj.findAll()
-      .then(data => {
-        res.json(data);
-      })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving object."
-        });
-      });
+          .then(data => {
+            res.json(data);
+          })
+          .catch(err => {
+            res.status(500).send({
+              message:
+                err.message || "Some error occurred while retrieving object."
+            });
+          });
+
   };
 
 exports.findOne = (req, res) => {
@@ -128,3 +128,6 @@ exports.findOne = (req, res) => {
         });
       });
   };
+
+
+  

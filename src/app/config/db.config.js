@@ -1,8 +1,9 @@
 module.exports={
-    HOST:"ec2-44-194-6-121.compute-1.amazonaws.com",
-    USER:"hgxshzhmjkdrfv",
-    PASSWORD:"cba435b77e272dbbb958c1b05c254b1fd3b5903fb2636ab6fc593b15167b5d7c",
-    DB: "d37hs92uiui5fp",
+    HOST:"ec2-18-209-143-227.compute-1.amazonaws.com",
+    PORT:5432,
+    USER:"yrkwibqpwqdmny",    
+    PASSWORD:"325f47578a366356f01b9497c3b3732e4650b5e08c591eff89f5800e9daf04b0",
+    DB: "d1r9184mfptv7p",
     dialect: "postgres",
     pool: {
         max:10,
@@ -13,6 +14,7 @@ module.exports={
     /*
     //Local
     HOST:"localhost",
+    PORT:5432,
     USER:"postgres",
     PASSWORD:"1234",
     DB: "angelDB",

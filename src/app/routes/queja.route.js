@@ -7,7 +7,7 @@ module.exports = router =>{
     api.post("/", ws.create);
     api.get("/",ensureToken,ws.findAll);
     api.get("/:id",ensureToken,ws.findOne);
-    api.get("/comercio/:id",ensureToken,ws.findOneComercio);
+    api.get("/sucursal/:id",ensureToken,ws.findOneSucursal);
     api.put("/:id",ensureToken,ws.update);
     api.delete("/:id",ensureToken,ws.delete);
 

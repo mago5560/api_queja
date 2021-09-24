@@ -19,7 +19,7 @@ exports.create=(req, res) =>{
           fecha: req.body.fecha,
           hora: req.body.hora,
           observaciones: req.body.observaciones,
-          comercioId: req.body.comercioId
+          sucursalId: req.body.sucursalId
       }
 
       Obj.create(_Obj)
@@ -77,10 +77,10 @@ exports.findOne = (req, res) => {
   };
 
 
-exports.findOneComercio = (req, res) => {
+exports.findOneSucursal = (req, res) => {
   const id = req.params.id;
 
-  Obj.findAll({where:{comercioId:id}, 
+  Obj.findAll({where:{sucursalId:id}, 
                 include:[
                     { model:Comercio,
                       include:[{model:Municipio

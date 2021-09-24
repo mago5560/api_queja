@@ -4,6 +4,7 @@ const Departamento = db.departamento;
 const Municipio = db.municipio;
 const Encargado = db.encargado;
 const Comercio = db.comercio;
+const Sucursal = db.sucursal;
 const Op = db.Sequelize.Op;
 
 exports.create=(req, res) =>{
@@ -37,11 +38,12 @@ exports.create=(req, res) =>{
 exports.findAll = (req, res) => {
 
     Obj.findAll({ include:[
-                           { model:Comercio,
-                             include:[{model:Municipio
-                                      ,include:{model:Departamento ,include:'region' }
-                                      }
-                                      ,{model:Encargado}]
+                           { model:Sucursal,
+                            include:[{model:Comercio,
+                              include:[{model:Municipio
+                                       ,include:{model:Departamento ,include:'region' }
+                                       }
+                                       ,{model:Encargado}]}] 
                           }]      
     })
       .then(data => {
@@ -59,12 +61,13 @@ exports.findOne = (req, res) => {
     const id = req.params.id;
   
     Obj.findByPk(id,{ include:[
-        { model:Comercio,
-          include:[{model:Municipio
-                   ,include:{model:Departamento ,include:'region' }
-                   }
-                   ,{model:Encargado}]
-       }]
+      { model:Sucursal,
+       include:[{model:Comercio,
+         include:[{model:Municipio
+                  ,include:{model:Departamento ,include:'region' }
+                  }
+                  ,{model:Encargado}]}] 
+     }]
     })
       .then(data => {
         res.json(data);
@@ -82,12 +85,13 @@ exports.findOneSucursal = (req, res) => {
 
   Obj.findAll({where:{sucursalId:id}, 
                 include:[
-                    { model:Comercio,
-                      include:[{model:Municipio
-                               ,include:{model:Departamento ,include:'region' }
-                               }
-                               ,{model:Encargado}]
-                   }]
+                  { model:Sucursal,
+                   include:[{model:Comercio,
+                     include:[{model:Municipio
+                              ,include:{model:Departamento ,include:'region' }
+                              }
+                              ,{model:Encargado}]}] 
+                 }]
   })
     .then(data => {
       res.json(data);

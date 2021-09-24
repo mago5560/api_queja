@@ -1,3 +1,5 @@
+const jwt = require("jsonwebtoken");
+
 module.exports = router =>{
     const ws = require("../controller/municipio.controller.js");
     var api = require("express").Router();

@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       observaciones: {
         type: Sequelize.STRING
-      }
+      }      
     });
   
     return Queja;

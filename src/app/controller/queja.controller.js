@@ -20,7 +20,11 @@ exports.create=(req, res) =>{
           fecha: req.body.fecha,
           hora: req.body.hora,
           observaciones: req.body.observaciones,
-          sucursalId: req.body.sucursalId
+          sucursalId: req.body.sucursalId,
+          comercioId: req.body.comercioId,
+          municipioId: req.body.municipioId,
+          departamentoId: req.body.departamentoId,
+          regionId: req.body.departamentoId
       }
 
       Obj.create(_Obj)
@@ -80,6 +84,106 @@ exports.findOne = (req, res) => {
   };
 
 
+  exports.findOneRegion = (req, res) => {
+    const id = req.params.id;
+  
+    Obj.findAll({ 
+                  include:[
+                    { model:Sucursal,                     
+                     include:[{model:Comercio,                      
+                       include:[{model:Municipio,                                
+                                include:{model:Departamento ,
+                                  where:{regionId:id},
+                                  include:'region' }
+                                }
+                                ,{model:Encargado}]}] 
+                   }]
+    })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error retrieving find one object with id=" + id
+        });
+      });
+  };
+
+  exports.findOneDepartamento = (req, res) => {
+    const id = req.params.id;
+  
+    Obj.findAll({ 
+                  include:[
+                    { model:Sucursal,                     
+                     include:[{model:Comercio,                      
+                       include:[{model:Municipio,
+                                where:{departamentoId:id},
+                                include:{model:Departamento ,include:'region' }
+                                }
+                                ,{model:Encargado}]}] 
+                   }]
+    })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error retrieving find one object with id=" + id
+        });
+      });
+  };
+
+
+
+  exports.findOneMunicipio = (req, res) => {
+    const id = req.params.id;
+  
+    Obj.findAll({ 
+                  include:[
+                    { model:Sucursal,                     
+                     include:[{model:Comercio,
+                      where:{municipioId:id},
+                       include:[{model:Municipio
+                                ,include:{model:Departamento ,include:'region' }
+                                }
+                                ,{model:Encargado}]}] 
+                   }]
+    })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error retrieving find one object with id=" + id
+        });
+      });
+  };
+
+
+  exports.findOneComercio = (req, res) => {
+    const id = req.params.id;
+  
+    Obj.findAll({ 
+                  include:[
+                    { model:Sucursal,
+                      where:{comercioId:id},
+                     include:[{model:Comercio,
+                       include:[{model:Municipio
+                                ,include:{model:Departamento ,include:'region' }
+                                }
+                                ,{model:Encargado}]}] 
+                   }]
+    })
+      .then(data => {
+        res.json(data);
+      })
+      .catch(err => {
+        res.status(500).send({
+          message: "Error retrieving find one object with id=" + id
+        });
+      });
+  };
+
 exports.findOneSucursal = (req, res) => {
   const id = req.params.id;
 
@@ -102,6 +206,7 @@ exports.findOneSucursal = (req, res) => {
       });
     });
 };
+
 
   exports.update = (req, res) => {
     const id = req.params.id;

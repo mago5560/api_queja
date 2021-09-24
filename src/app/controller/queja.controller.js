@@ -24,7 +24,7 @@ exports.create=(req, res) =>{
           comercioId: req.body.comercioId,
           municipioId: req.body.municipioId,
           departamentoId: req.body.departamentoId,
-          regionId: req.body.departamentoId
+          regionId: req.body.regionId
       }
 
       Obj.create(_Obj)

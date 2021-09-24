@@ -8,7 +8,7 @@ module.exports = router =>{
     api.get("/",ws.findAll);
     api.get("/:id",ws.findOne);
     api.get("/municipio/:id",ws.findOneMunicipio);
-    api.get("/municipio/:id",ensureToken,ws.findOneEncargado);
+    api.get("/encargado/:id",ensureToken,ws.findOneEncargado);
     api.put("/:id",ensureToken,ws.update);
     api.delete("/:id",ensureToken,ws.delete);
 

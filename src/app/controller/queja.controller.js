@@ -87,13 +87,12 @@ exports.findOne = (req, res) => {
   exports.findOneRegion = (req, res) => {
     const id = req.params.id;
   
-    Obj.findAll({ 
+    Obj.findAll({ where:{regionId:id},
                   include:[
                     { model:Sucursal,                     
                      include:[{model:Comercio,                      
                        include:[{model:Municipio,                                
-                                include:{model:Departamento ,
-                                  where:{regionId:id},
+                                include:{model:Departamento ,                                  
                                   include:'region' }
                                 }
                                 ,{model:Encargado}]}] 
@@ -112,12 +111,11 @@ exports.findOne = (req, res) => {
   exports.findOneDepartamento = (req, res) => {
     const id = req.params.id;
   
-    Obj.findAll({ 
+    Obj.findAll({ where:{departamentoId:id},
                   include:[
                     { model:Sucursal,                     
                      include:[{model:Comercio,                      
-                       include:[{model:Municipio,
-                                where:{departamentoId:id},
+                       include:[{model:Municipio,                                
                                 include:{model:Departamento ,include:'region' }
                                 }
                                 ,{model:Encargado}]}] 
@@ -138,11 +136,10 @@ exports.findOne = (req, res) => {
   exports.findOneMunicipio = (req, res) => {
     const id = req.params.id;
   
-    Obj.findAll({ 
+    Obj.findAll({ where:{municipioId:id},
                   include:[
                     { model:Sucursal,                     
-                     include:[{model:Comercio,
-                      where:{municipioId:id},
+                     include:[{model:Comercio,                      
                        include:[{model:Municipio
                                 ,include:{model:Departamento ,include:'region' }
                                 }
@@ -163,10 +160,9 @@ exports.findOne = (req, res) => {
   exports.findOneComercio = (req, res) => {
     const id = req.params.id;
   
-    Obj.findAll({ 
+    Obj.findAll({ where:{comercioId:id},
                   include:[
-                    { model:Sucursal,
-                      where:{comercioId:id},
+                    { model:Sucursal,                      
                      include:[{model:Comercio,
                        include:[{model:Municipio
                                 ,include:{model:Departamento ,include:'region' }

@@ -8,7 +8,20 @@ module.exports = (sequelize, Sequelize) => {
       },
       observaciones: {
         type: Sequelize.STRING
-      }      
+      }
+      
+      ,comercioId:{
+        type: Sequelize.INTEGER
+      }
+      ,municipioId:{
+        type: Sequelize.INTEGER
+      }
+      ,departamentoId:{
+        type: Sequelize.INTEGER
+      }
+      ,regionId:{
+        type: Sequelize.INTEGER
+      }
     });
   
     return Queja;

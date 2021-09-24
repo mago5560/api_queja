@@ -8,7 +8,7 @@ module.exports = router =>{
     api.get("/",ensureToken,ws.findAll);
     api.get("/:id",ensureToken,ws.findOne);
     api.get("/region/:id",ensureToken,ws.findOneRegion);
-    api.get("/departamento/:id",ensureToken,ws.findDepartamento);
+    api.get("/departamento/:id",ensureToken,ws.findOneDepartamento);
     api.get("/municipio/:id",ensureToken,ws.findOneMunicipio);
     api.get("/comercio/:id",ensureToken,ws.findOneComercio);
     api.get("/sucursal/:id",ensureToken,ws.findOneSucursal);

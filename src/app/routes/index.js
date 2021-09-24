@@ -15,6 +15,7 @@ require('./region.route')(router)
 require('./departamento.route')(router)
 require('./municipio.route')(router)
 require('./comercio.route')(router)
+require('./sucursal.route')(router)
 require('./encargado.route')(router)
 require('./queja.route')(router)
 

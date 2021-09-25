@@ -57,7 +57,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Obj.findByPk(id,{ include:[{model:Comercio
+    Obj.findAll({ where:{id:id},include:[{model:Comercio
                                 , include:[{model:Municipio,include:[{model:Departamento ,include:'region' }]
                             },{model:Encargado}]
                             },{model:Queja}

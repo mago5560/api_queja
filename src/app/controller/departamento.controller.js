@@ -45,7 +45,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Obj.findByPk(id,{ include:'region'})
+    Obj.findAll({ where:{id:id},include:'region'})
       .then(data => {
         res.json(data);
       })
